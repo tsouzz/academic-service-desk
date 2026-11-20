@@ -1,0 +1,124 @@
+### Testes da API REST de chamados (IntelliJ HTTP Client / VS Code REST Client)
+### Autenticação: HTTP Basic com e-mail e senha de um usuário cadastrado.
+### Gestor: thulio.alves@ifsp.edu.br / senha123   |   Aluno: ewerton.monteiro@aluno.ifsp.edu.br / senha123
+
+@host = http://localhost:8080
+@gestor = Basic dGh1bGlvLmFsdmVzQGlmc3AuZWR1LmJyOnNlbmhhMTIz
+@aluno = Basic ZXdlcnRvbi5tb250ZWlyb0BhbHVuby5pZnNwLmVkdS5icjpzZW5oYTEyMw==
+
+### GET - listar (aceita ?status=ABERTO&categoriaId=1)
+GET {{host}}/api/chamados
+Authorization: {{gestor}}
+
+### GET - consultar por id
+GET {{host}}/api/chamados/1
+Authorization: {{gestor}}
+
+### GET - id inexistente (404)
+GET {{host}}/api/chamados/99999
+Authorization: {{gestor}}
+
+### POST - cadastrar (201 + Location)
+POST {{host}}/api/chamados
+Authorization: {{aluno}}
+Content-Type: application/json
+
+{
+  "titulo": "Projetor da sala 3 não liga",
+  "descricao": "O projetor não responde ao controle remoto.",
+  "categoriaId": 1
+}
+
+### POST - validação (400)
+POST {{host}}/api/chamados
+Authorization: {{aluno}}
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "descricao": "",
+  "categoriaId": null
+}
+
+### PUT - atualizar status/atendimento (informe a "versao" atual retornada pelo GET)
+PUT {{host}}/api/chamados/1
+Authorization: {{gestor}}
+Content-Type: application/json
+
+{
+  "versao": 0,
+  "status": "EM_ANALISE",
+  "prioridade": "ALTA",
+  "responsavelId": null,
+  "observacaoAtendimento": "Chamado em análise pela equipe de TI."
+}
+
+### DELETE - excluir (somente GESTOR; 204)
+DELETE {{host}}/api/chamados/1
+Authorization: {{gestor}}
+
+### DELETE - sem permissão (403)
+DELETE {{host}}/api/chamados/1
+Authorization: {{aluno}}
+### Testes da API REST de chamados (IntelliJ HTTP Client / VS Code REST Client)
+### Autenticação: HTTP Basic com e-mail e senha de um usuário cadastrado.
+### Gestor: thulio.alves@ifsp.edu.br / senha123   |   Aluno: ewerton.monteiro@aluno.ifsp.edu.br / senha123
+
+@host = http://localhost:8080
+@gestor = Basic dGh1bGlvLmFsdmVzQGlmc3AuZWR1LmJyOnNlbmhhMTIz
+@aluno = Basic ZXdlcnRvbi5tb250ZWlyb0BhbHVuby5pZnNwLmVkdS5icjpzZW5oYTEyMw==
+
+### GET - listar (aceita ?status=ABERTO&categoriaId=1)
+GET {{host}}/api/chamados
+Authorization: {{gestor}}
+
+### GET - consultar por id
+GET {{host}}/api/chamados/1
+Authorization: {{gestor}}
+
+### GET - id inexistente (404)
+GET {{host}}/api/chamados/99999
+Authorization: {{gestor}}
+
+### POST - cadastrar (201 + Location)
+POST {{host}}/api/chamados
+Authorization: {{aluno}}
+Content-Type: application/json
+
+{
+  "titulo": "Projetor da sala 3 não liga",
+  "descricao": "O projetor não responde ao controle remoto.",
+  "categoriaId": 1
+}
+
+### POST - validação (400)
+POST {{host}}/api/chamados
+Authorization: {{aluno}}
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "descricao": "",
+  "categoriaId": null
+}
+
+### PUT - atualizar status/atendimento (informe a "versao" atual retornada pelo GET)
+PUT {{host}}/api/chamados/1
+Authorization: {{gestor}}
+Content-Type: application/json
+
+{
+  "versao": 0,
+  "status": "EM_ANALISE",
+  "prioridade": "ALTA",
+  "responsavelId": null,
+  "observacaoAtendimento": "Chamado em análise pela equipe de TI."
+}
+
+### DELETE - excluir (somente GESTOR; 204)
+DELETE {{host}}/api/chamados/1
+Authorization: {{gestor}}
+
+### DELETE - sem permissão (403)
+DELETE {{host}}/api/chamados/1
+Authorization: {{aluno}}
